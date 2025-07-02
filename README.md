@@ -1,6 +1,6 @@
 # Product Manager API - CRUD Operations
 
-![Project Screenshot](screenshot.png) *[Note: Add screenshot after running the project]*
+![image](https://github.com/user-attachments/assets/4fe8b55d-f21b-45cb-be0e-7faad6e0fd89)
 
 ## Project Description
 A web application that demonstrates CRUD (Create, Read, Update, Delete) operations using JavaScript Fetch API with a JSON Server backend. This project was developed as part of Module 3, Week 3 training.
