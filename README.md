@@ -1,4 +1,6 @@
 # Product Manager API - CRUD Operations
+![image](https://github.com/user-attachments/assets/74938cbd-7f7b-4a8f-934e-b1eb911f063f)
+
 
 ## 📦 Project Description
 A web application that demonstrates CRUD (Create, Read, Update, Delete) operations using JavaScript Fetch API with a JSON Server backend. This project was developed as part of Module 3, Week 3 training.
@@ -41,16 +43,14 @@ A web application that demonstrates CRUD (Create, Read, Update, Delete) operatio
    Press `Windows + R`, type `cmd`, and press Enter.
 
 2. **Navigate to your project folder**  
-   ```bash
+
    cd path\to\your\project
 Install JSON Server globally (only once)
 
-   ```bash
-  npm install -g json-server
+    npm install -g json-server@0.17.4
 Start the JSON server
 
-   ```bash
-  json-server --watch db.json
+    json-server --watch db.json
 
 Open index.html in your browser
 
@@ -59,35 +59,32 @@ Open your terminal
 
 Navigate to your project folder
 
-   ```bash
-  cd /path/to/your/project
+    cd /path/to/your/project
 Install JSON Server globally (only once)
 
-   ```bash
-  sudo npm install -g json-server
+    sudo npm install -g json-server@0.17.4
 Start the server
 
-   ```bash
   json-server --watch db.json
 Open index.html in your browser (Firefox, Chromium, etc.)
 
-🌐 API Endpoints
-Method	URL	Description
-GET	/products	Get all products
-POST	/products	Add new product
-PUT	/products/:id	Update product by ID
-DELETE	/products/:id	Delete product by ID
+### 🌐 API Endpoints
+    Method	URL	Description
+    GET	/products	Get all products
+    POST	/products	Add new product
+    PUT	/products/:id	Update product by ID
+    DELETE	/products/:id	Delete product by ID
 
-🧪 How to Use the App
+### 🧪 How to Use the App
 View Products: All products load automatically when the page opens.
 
-Add Product:
+### Add Product:
 
 Fill in the name and price fields
 
 Click "Add Product"
 
-Edit Product:
+### Edit Product:
 
 Click the "Edit" button on a product
 
@@ -95,13 +92,13 @@ Modify name and/or price
 
 Click "Update Product"
 
-Delete Product:
+### Delete Product:
 
 Click the "Delete" button on a product
 
 Confirm the deletion
 
-🛠️ Troubleshooting
+### 🛠️ Troubleshooting
 ✅ Ensure JSON Server is running at http://localhost:3000/products
 
 ✅ Open your browser console (F12) to check for errors
@@ -109,4 +106,3 @@ Confirm the deletion
 ✅ Make sure your db.json is valid and contains a products array
 
 ✅ On Linux, verify that port 3000 is not blocked by a firewall
-
