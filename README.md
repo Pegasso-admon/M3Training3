@@ -65,7 +65,7 @@ Install JSON Server globally (only once)
     sudo npm install -g json-server@0.17.4
 Start the server
 
-  json-server --watch db.json
+    json-server --watch db.json
 Open index.html in your browser (Firefox, Chromium, etc.)
 
 ### 🌐 API Endpoints
@@ -99,10 +99,10 @@ Click the "Delete" button on a product
 Confirm the deletion
 
 ### 🛠️ Troubleshooting
-✅ Ensure JSON Server is running at http://localhost:3000/products
-
-✅ Open your browser console (F12) to check for errors
-
-✅ Make sure your db.json is valid and contains a products array
-
-✅ On Linux, verify that port 3000 is not blocked by a firewall
+    ✅ Ensure JSON Server is running at http://localhost:3000/products
+    
+    ✅ Open your browser console (F12) to check for errors
+    
+    ✅ Make sure your db.json is valid and contains a products array
+    
+    ✅ On Linux, verify that port 3000 is not blocked by a firewall
