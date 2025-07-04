@@ -1,92 +1,112 @@
 # Product Manager API - CRUD Operations
 
-![image](https://github.com/user-attachments/assets/4fe8b55d-f21b-45cb-be0e-7faad6e0fd89)
-
-## Project Description
+## 📦 Project Description
 A web application that demonstrates CRUD (Create, Read, Update, Delete) operations using JavaScript Fetch API with a JSON Server backend. This project was developed as part of Module 3, Week 3 training.
 
-## Features
-- **Full CRUD functionality**:
+## 🚀 Features
+- Full CRUD functionality:
   - Create new products
   - Read/display all products
   - Update existing products
   - Delete products
-- **Responsive UI** with clean design
-- **Error handling** for API requests
-- **Form validation** before submission
-- **Real-time updates** of product list
+- Responsive UI with clean design
+- Error handling for API requests
+- Form validation before submission
+- Real-time product list updates
 
-## Technologies Used
+## 🧰 Technologies Used
 - HTML5
 - CSS3
 - JavaScript (ES6)
 - Fetch API
 - JSON Server (for mock backend)
 
+---
 
-## Setup Instructions
+## ⚙️ Setup Instructions
 
-### Prerequisites
-- Node.js (v14 or higher)
-- npm (comes with Node.js)
+### 📌 Prerequisites (Windows and Linux)
+- **Node.js** installed  
+  👉 [Download Node.js](https://nodejs.org/)
 
-### Installation
-1. Clone the repository or download the project files
-2. Install JSON Server globally:
+- **npm** (included with Node.js)
 
-   npm install -g json-server
+---
 
-### How to Run
-1. Start JSON Server:
+## 🖥️ How to Run the Project
 
-    json-server --watch db.json
+### 🪟 On Windows
 
-2. Open index.html in your browser
+1. **Open PowerShell or CMD**  
+   Press `Windows + R`, type `cmd`, and press Enter.
 
-### API Endpoints
-- GET /products - Get all products
+2. **Navigate to your project folder**  
+   ```bash
+   cd path\to\your\project
+Install JSON Server globally (only once)
 
-- POST /products - Add new product
+   ```bash
+  npm install -g json-server
+Start the JSON server
 
-- PUT /products/:id - Update product
+   ```bash
+  json-server --watch db.json
 
-- DELETE /products/:id - Remove product
+Open index.html in your browser
 
-### How to Use
-1. View Products: Automatically loads when page opens
+🐧 On Linux (Ubuntu, Debian, Arch, etc.)
+Open your terminal
 
-2. Add Product:
+Navigate to your project folder
 
-- Fill name and price
+   ```bash
+  cd /path/to/your/project
+Install JSON Server globally (only once)
 
-- Click "Add Product"
+   ```bash
+  sudo npm install -g json-server
+Start the server
 
-3. Edit Product:
+   ```bash
+  json-server --watch db.json
+Open index.html in your browser (Firefox, Chromium, etc.)
 
-- Click "Edit" on product card
+🌐 API Endpoints
+Method	URL	Description
+GET	/products	Get all products
+POST	/products	Add new product
+PUT	/products/:id	Update product by ID
+DELETE	/products/:id	Delete product by ID
 
-- Modify values
+🧪 How to Use the App
+View Products: All products load automatically when the page opens.
 
-- Click "Update Product"
+Add Product:
 
-4. Delete Product:
+Fill in the name and price fields
 
-- Click "Delete" on product card
+Click "Add Product"
 
-- Confirm deletion
+Edit Product:
 
-### Code Notes
-- Uses camelCase variables
+Click the "Edit" button on a product
 
-- ES6 JavaScript
+Modify name and/or price
 
-- Detailed comments
+Click "Update Product"
 
-- Error handling
+Delete Product:
 
-### Troubleshooting
-- Verify JSON Server is running
+Click the "Delete" button on a product
 
-- Check browser console for errors
+Confirm the deletion
 
-- Ensure CORS isn't blocking requests
+🛠️ Troubleshooting
+✅ Ensure JSON Server is running at http://localhost:3000/products
+
+✅ Open your browser console (F12) to check for errors
+
+✅ Make sure your db.json is valid and contains a products array
+
+✅ On Linux, verify that port 3000 is not blocked by a firewall
+

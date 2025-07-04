@@ -15,6 +15,7 @@ const cancelBtn = document.getElementById('cancelBtn');
 // Event Listeners
 document.addEventListener('DOMContentLoaded', fetchProducts);
 productForm.addEventListener('submit', handleFormSubmit);
+updateBtn.addEventListener('click', handleUpdateSubmit);
 cancelBtn.addEventListener('click', resetForm);
 
 /**
@@ -23,11 +24,7 @@ cancelBtn.addEventListener('click', resetForm);
 async function fetchProducts() {
     try {
         const response = await fetch(API_URL);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const products = await response.json();
         displayProducts(products);
     } catch (error) {
@@ -42,69 +39,86 @@ async function fetchProducts() {
  */
 function displayProducts(products) {
     productList.innerHTML = '';
-    
+
     if (products.length === 0) {
         productList.innerHTML = '<p>No products found. Add some products to get started!</p>';
         return;
     }
-    
+
     products.forEach(product => {
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
         productCard.innerHTML = `
-            <h3>${product.nombre || product.name}</h3>
-            <p>Price: $${product.precio || product.price}</p>
+            <h3>${product.name}</h3>
+            <p>Price: $${product.price}</p>
             <div class="product-actions">
                 <button class="edit-btn" data-id="${product.id}">Edit</button>
                 <button class="delete-btn" data-id="${product.id}">Delete</button>
             </div>
         `;
-        
         productList.appendChild(productCard);
     });
-    
-    // Add event listeners to edit and delete buttons
+
     document.querySelectorAll('.edit-btn').forEach(btn => {
         btn.addEventListener('click', handleEdit);
     });
-    
+
     document.querySelectorAll('.delete-btn').forEach(btn => {
         btn.addEventListener('click', handleDelete);
     });
 }
 
 /**
- * Handles form submission for adding/updating products
+ * Handles form submission for adding products
  * @param {Event} e - Form submit event
  */
 async function handleFormSubmit(e) {
     e.preventDefault();
-    
+
     const productData = {
-        nombre: productNameInput.value,
-        precio: parseFloat(productPriceInput.value)
+        name: productNameInput.value,
+        price: parseFloat(productPriceInput.value)
     };
-    
-    // Validate inputs
-    if (!productData.nombre || isNaN(productData.precio)) {
+
+    if (!productData.name || isNaN(productData.price)) {
         alert('Please fill in all fields with valid values');
         return;
     }
-    
+
     try {
-        if (currentProductId) {
-            // Update existing product
-            await updateProduct(currentProductId, productData);
-        } else {
-            // Add new product
-            await addProduct(productData);
-        }
-        
+        await addProduct(productData);
         resetForm();
         await fetchProducts();
     } catch (error) {
         console.error('Error saving product:', error);
         alert('Failed to save product. Please check console for details.');
+    }
+}
+
+/**
+ * Handles updating an existing product
+ * @param {Event} e - Button click event
+ */
+async function handleUpdateSubmit(e) {
+    e.preventDefault();
+
+    const productData = {
+        name: productNameInput.value,
+        price: parseFloat(productPriceInput.value)
+    };
+
+    if (!productData.name || isNaN(productData.price)) {
+        alert('Please fill in all fields with valid values');
+        return;
+    }
+
+    try {
+        await updateProduct(currentProductId, productData);
+        resetForm();
+        await fetchProducts();
+    } catch (error) {
+        console.error('Error updating product:', error);
+        alert('Failed to update product. Please check console for details.');
     }
 }
 
@@ -115,16 +129,11 @@ async function handleFormSubmit(e) {
 async function addProduct(product) {
     const response = await fetch(API_URL, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(product)
     });
-    
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    
+
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     return await response.json();
 }
 
@@ -136,16 +145,11 @@ async function addProduct(product) {
 async function updateProduct(id, product) {
     const response = await fetch(`${API_URL}/${id}`, {
         method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(product)
     });
-    
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    
+
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     return await response.json();
 }
 
@@ -156,17 +160,14 @@ async function updateProduct(id, product) {
 function handleEdit(e) {
     const productId = e.target.getAttribute('data-id');
     currentProductId = productId;
-    
-    // Find the product card
+
     const productCard = e.target.closest('.product-card');
     const productName = productCard.querySelector('h3').textContent;
     const productPrice = productCard.querySelector('p').textContent.replace('Price: $', '');
-    
-    // Fill the form
+
     productNameInput.value = productName;
     productPriceInput.value = productPrice;
-    
-    // Update button states
+
     saveBtn.disabled = true;
     updateBtn.disabled = false;
     cancelBtn.disabled = false;
@@ -177,12 +178,10 @@ function handleEdit(e) {
  * @param {Event} e - Click event
  */
 async function handleDelete(e) {
-    if (!confirm('Are you sure you want to delete this product?')) {
-        return;
-    }
-    
+    if (!confirm('Are you sure you want to delete this product?')) return;
+
     const productId = e.target.getAttribute('data-id');
-    
+
     try {
         await deleteProduct(productId);
         await fetchProducts();
@@ -200,11 +199,8 @@ async function deleteProduct(id) {
     const response = await fetch(`${API_URL}/${id}`, {
         method: 'DELETE'
     });
-    
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    
+
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     return await response.json();
 }
 
@@ -215,8 +211,7 @@ function resetForm() {
     productForm.reset();
     currentProductId = null;
     productIdInput.value = '';
-    
-    // Reset button states
+
     saveBtn.disabled = false;
     updateBtn.disabled = true;
     cancelBtn.disabled = true;
